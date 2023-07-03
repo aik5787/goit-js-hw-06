@@ -7,3 +7,4 @@ function fontSizeChanger() {
     const fontSize = input.value;
     text.style.fontSize = `${fontSize}px`;
 }
+fontSizeChanger()

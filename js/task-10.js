@@ -9,16 +9,24 @@ const createBtn = document.querySelector('[data-create]');
 const destroyBtn = document.querySelector('[data-destroy]');
 const boxesContainer = document.querySelector('#boxes');
 
+const min = Number(document.querySelector('input[type="number"]').getAttribute('min'));
+const max = Number(document.querySelector('input[type="number"]').getAttribute('max'));
+const step = Number(document.querySelector('input[type="number"]').getAttribute('step'));
 
 createBtn.addEventListener('click', createBoxes);
 destroyBtn.addEventListener('click', destroyBoxes);
+
 
 
 function createBoxes() {
   const amount = Number(input.value);
   const boxes = [];
 
-  for (let i = 0; i < amount; i++) {
+  if (amount < min || amount > max) {
+    alert('Value is out of limit');
+    return
+  } else {
+    for (let i = 0; i < amount; i += step) {
     const box = document.createElement('div');
     box.style.width = `${30 + i * 10}px`;
     box.style.height = `${30 + i * 10}px`;
@@ -27,6 +35,9 @@ function createBoxes() {
   }
 
   boxesContainer.append(...boxes);
+  }
+
+  
 }
 
 
@@ -36,4 +47,5 @@ function createBoxes() {
 function destroyBoxes() {
   boxesContainer.innerHTML = '';
   input.value = ''; 
+  const boxes = [];
 }
